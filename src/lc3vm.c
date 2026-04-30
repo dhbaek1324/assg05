@@ -578,8 +578,8 @@ void init(uint16_t offset)
 
   // set MCR/PSR, e.g. enable the clock, set priority to 0 and
   // start in user mode
-  // enable_clock();
-  // user_mode();
+  enable_clock();
+  user_mode();
 
   // initialize memory mapped status registers
   iomap[KBSR] = 0x0000; // 0 indicates no key is available yet for a program to read
@@ -682,7 +682,7 @@ void start(uint16_t offset)
 
   // perform the fetch-decode-execute cycle while the
   // run clock/latch is enabled
-  while (true) // needs to be modified to use is_running() once implemented
+  while (is_running()) // needs to be modified to use is_running() once implemented
   {
     // fetch the next instruction from memory
     uint16_t i = mem_read(reg[RPC]);
