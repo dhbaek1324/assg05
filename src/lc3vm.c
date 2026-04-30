@@ -808,6 +808,11 @@ void set_priority(uint16_t level)
  *
  * @param value
  */
+void push(uint16_t value)
+{
+  reg[R6]--;
+  mem_write(reg[R6], value);
+}
 
 /** @brief pop top of current stack
  *
@@ -815,6 +820,10 @@ void set_priority(uint16_t level)
  * that `R6` holds the address of the top of the current stack in use
  * by the running program.
  */
+void pop()
+{
+  reg[R6]++;
+}
 
 /** @brief enable clock run bit
  *
