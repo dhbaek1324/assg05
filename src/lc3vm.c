@@ -479,6 +479,12 @@ void jsr(uint16_t i)
  */
 void rti(uint16_t i)
 {
+  if (is_user_mode())
+  {
+    except(0x00);
+    return;
+  }
+
   reg[PSR] = mem_read(reg[R6]);
   pop();
 
