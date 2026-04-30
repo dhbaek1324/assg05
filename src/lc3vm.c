@@ -748,27 +748,25 @@ bool is_user_mode()
   return (reg[PSR] & 0x8000) != 0;
 }
 
-void user_mode()
-{
-  reg[PSR] |= 0x8000;
-}
-
-void supervisor_mode()
-{
-  reg[PSR] &= 0x7FFF;
-}
-
 /** @brief set user mode
  *
  * Set the machine into user mode.  This function sets bit 15 to be 1 to indicate
  * that we are now running in the less privileged user mode.
  */
+void user_mode()
+{
+  reg[PSR] |= 0x8000;
+}
 
 /** @brief set supervisor mode
  *
  * Set the machine into supervisor mode.  This function sets bit 15 to be 0
  * to indicate that we are now running in the more privileged supervisor mode.
  */
+void supervisor_mode()
+{
+  reg[PSR] &= 0x7FFF;
+}
 
 /** @brief get priority
  *
@@ -779,6 +777,10 @@ void supervisor_mode()
  *   significant 3 bits should have any value since only priority levels
  *   0 - 7 are possible
  */
+uint16_t priority()
+{
+  return (reg[PSR] >> 8) & 0x7;
+}
 
 /** @brief set priority
  *
@@ -790,6 +792,11 @@ void supervisor_mode()
  *   it is undefined what happens if a value not in this range is set for the
  *   priority.
  */
+void set_priority(uint16_t level)
+{
+  reg[PSR] &= 0xF8FF;
+  reg[PSR] |= (level & 0x7) << 8;
+}
 
 /** @brief push value to current stack
  *
