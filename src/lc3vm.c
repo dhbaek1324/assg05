@@ -467,7 +467,20 @@ void jsr(uint16_t i)
  * @param i The instruction.  The bits of the instruction we are
  *   executing.
  */
-void rti(uint16_t i) {}
+void rti(uint16_t i)
+{
+  reg[PSR] = mem_read(reg[R6]);
+  pop();
+
+  reg[RPC] = mem_read(reg[R6]);
+  pop();
+
+  if (is_user_mode())
+  {
+    reg[SSP] = reg[R6];
+    reg[R6] = reg[USP];
+  }
+}
 
 /** @brief reserved
  *
