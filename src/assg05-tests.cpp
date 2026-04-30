@@ -26,7 +26,7 @@ using namespace std;
 #define task5
 #define task6_1
 #define task6_2
-#undef task7_1
+#define task7_1
 #undef task7_2
 #undef task7_3
 #undef task7_4

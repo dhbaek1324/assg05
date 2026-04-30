@@ -912,3 +912,19 @@ bool is_running()
  *   the exception vector number we use to index into the exception service
  *   vector table.
  */
+void except(uint16_t i)
+{
+  uint16_t temp_psr = reg[PSR];
+
+  if (is_user_mode())
+  {
+    reg[USP] = reg[R6];
+    reg[R6] = reg[SSP];
+    supervisor_mode();
+  }
+
+  push(reg[RPC]);
+  push(temp_psr);
+
+  reg[RPC] = mem_read(0x0100 + TRP(i));
+}
