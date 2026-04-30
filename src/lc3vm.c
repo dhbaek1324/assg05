@@ -49,6 +49,12 @@ uint16_t PC_START = 0x3000;
  */
 uint16_t mem_read(uint16_t address)
 {
+  if (is_user_mode() && (address < 0x3000 || address > 0xFDFF))
+  {
+    except(0x02);
+    return 0x0000;
+  }
+
   if (address == KBDR_ADDR)
   {
     iomap[KBSR] &= 0x7FFF;
@@ -74,6 +80,12 @@ uint16_t mem_read(uint16_t address)
  */
 void mem_write(uint16_t address, uint16_t val)
 {
+  if (is_user_mode() && (address < 0x3000 || address > 0xFDFF))
+  {
+    except(0x02);
+    return;
+  }
+
   mem[address] = val;
 
   if (address == DDR_ADDR)
@@ -485,11 +497,14 @@ void rti(uint16_t i)
     return;
   }
 
-  reg[PSR] = mem_read(reg[R6]);
+  uint16_t saved_psr = mem_read(reg[R6]);
   pop();
 
-  reg[RPC] = mem_read(reg[R6]);
+  uint16_t saved_rpc = mem_read(reg[R6]);
   pop();
+
+  reg[PSR] = saved_psr;
+  reg[RPC] = saved_rpc;
 
   if (is_user_mode())
   {

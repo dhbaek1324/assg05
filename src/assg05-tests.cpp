@@ -29,7 +29,7 @@ using namespace std;
 #define task7_1
 #define task7_2
 #define task7_3
-#undef task7_4
+#define task7_4
 
 /**
  * @brief Task 1: Test privilege and priority functions in PSR
