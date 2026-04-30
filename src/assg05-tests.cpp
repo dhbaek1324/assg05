@@ -1,9 +1,9 @@
 /** @file assg05-tests.cpp
  * @brief Unit tests for OS assg 05
  *
- * @author Student Name
- * @note   cwid: 123456
- * @date   Spring 2024
+ * @author Donghyeon Baek
+ * @note   cwid: 50368152
+ * @date   Spring 2026
  * @note   ide:  VS Code Editor / IDE ; g++ 8.2.0 / GNU Make 4.2.1
  *
  * Unit tests for assignment 03, implementaiton of LC-3
@@ -17,7 +17,7 @@ using namespace std;
 #define TEST
 #include "lc3vm.h"
 
-#undef task1_1
+#define task1_1
 #undef task1_2
 #undef task2
 #undef task3

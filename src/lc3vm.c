@@ -1,9 +1,9 @@
 /** @file lc3vm.c
  * @brief LC-3 VM Implementation
  *
- * @author Student Name
- * @note   cwid: 123456
- * @date   Spring 2024
+ * @author Donghyeon Baek
+ * @note   cwid: 50368152
+ * @date   Spring 2026
  * @note   ide:  g++ 8.2.0 / GNU Make 4.2.1
  *
  * Implementation of LC-3 VM/Microarchitecture simulator.  Functions
@@ -743,6 +743,20 @@ void ld_img(char* fname)
  * @returns bool True if we are in user mode (bit 15 is 1) and False if we are
  *   in supervisor mode (bit 15 is 0).
  */
+bool is_user_mode()
+{
+  return (reg[PSR] & 0x8000) != 0;
+}
+
+void user_mode()
+{
+  reg[PSR] |= 0x8000;
+}
+
+void supervisor_mode()
+{
+  reg[PSR] &= 0x7FFF;
+}
 
 /** @brief set user mode
  *

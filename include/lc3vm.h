@@ -1,9 +1,9 @@
 /** @file lc3vm.h
  * @brief LC-3 VM API
  *
- * @author Student Name
- * @note   cwid: 123456
- * @date   Spring 2024
+ * @author Donghyeon Baek
+ * @note   cwid: 50368152
+ * @date   Spring 2026
  * @note   ide:  g++ 8.2.0 / GNU Make 4.2.1
  *
  * Header include file for LC-3 simulator API/functions.
@@ -139,6 +139,9 @@ void ld_img(char* fname);
 // at the bottom of the lc3vm.c file
 
 // task 1 PSR priority/privilege function declarations here
+bool is_user_mode();
+void user_mode();
+void supervisor_mode();
 
 // task 2 stack manipulation function declarations here
 
