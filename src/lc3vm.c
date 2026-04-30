@@ -508,7 +508,10 @@ void rti(uint16_t i)
  *   destination and source register operands, and to extract the
  *   second source register or the immediate value encoded in the
  */
-void res(uint16_t i) {}
+void res(uint16_t i)
+{
+  except(0x01);
+}
 
 /** @brief trap instruction
  *
